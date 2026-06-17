@@ -16,7 +16,8 @@ export const GET: APIRoute = async ({ request }) => {
   username = username.replace(/^@/, '').trim();
 
   const apiKey = (typeof process !== 'undefined' && process.env.RAPIDAPI_KEY) || import.meta.env.RAPIDAPI_KEY;
-  const rapidApiHost = (typeof process !== 'undefined' && process.env.RAPIDAPI_HOST) || import.meta.env.RAPIDAPI_HOST || 'instagram120.p.rapidapi.com';
+  // Forzamos instagram120 porque sabemos que es el correcto, evitando errores de tipeo en Vercel
+  const rapidApiHost = 'instagram120.p.rapidapi.com';
 
   // Si no hay clave de API configurada, devolvemos un error para saber que ese es el problema en Vercel
   if (!apiKey) {
