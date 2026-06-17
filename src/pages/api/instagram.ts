@@ -15,17 +15,18 @@ export const GET: APIRoute = async ({ request }) => {
   // Eliminar el '@' si el usuario lo ingresó por accidente
   username = username.replace(/^@/, '').trim();
 
-  const apiKey = import.meta.env.RAPIDAPI_KEY;
+  const apiKey = (typeof process !== 'undefined' && process.env.RAPIDAPI_KEY) || import.meta.env.RAPIDAPI_KEY;
+  const rapidApiHost = (typeof process !== 'undefined' && process.env.RAPIDAPI_HOST) || import.meta.env.RAPIDAPI_HOST || 'instagram120.p.rapidapi.com';
 
-  // Si no hay clave de API configurada, devolvemos los Mocks directamente
-  if (!apiKey || apiKey.trim() === '') {
-    console.log(`[API] RapidAPI Key no encontrada. Devolviendo mocks para @${username}`);
+  // Si no hay clave de API configurada, devolvemos un error para saber que ese es el problema en Vercel
+  if (!apiKey) {
     return new Response(JSON.stringify({ 
-      success: true, 
+      success: false, 
+      error: 'Falta configurar RAPIDAPI_KEY en las variables de entorno de Vercel.',
       isMock: true,
       data: getMockPosts(username) 
     }), {
-      status: 200,
+      status: 400,
       headers: { 'Content-Type': 'application/json' }
     });
   }

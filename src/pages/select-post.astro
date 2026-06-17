@@ -52,9 +52,16 @@ try {
     </header>
 
     <div class="max-w-4xl w-full px-4 text-center mb-10">
-      <h1 class="text-4xl md:text-5xl font-black tracking-tight text-gray-900 leading-tight">
+      <h1 class="text-4xl md:text-5xl font-black tracking-tight text-gray-900 leading-tight mb-4">
         Elige el post<br/>del sorteo
       </h1>
+      
+      {errorMsg && (
+        <div class="bg-red-50 text-red-600 p-4 rounded-xl mb-4 border border-red-100 max-w-2xl mx-auto text-left">
+          <p class="font-bold text-lg">⚠️ Ocurrió un error:</p>
+          <p class="font-medium text-sm mt-1">{errorMsg}</p>
+        </div>
+      )}
     </div>
 
     <!-- Posts Grid -->
