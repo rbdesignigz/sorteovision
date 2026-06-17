@@ -33,9 +33,7 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   try {
-    // Permitir configurar el Host por si el usuario elige otra API de Instagram en RapidAPI
-    const rapidApiHost = import.meta.env.RAPIDAPI_HOST || 'instagram130.p.rapidapi.com';
-    
+    // Usamos el rapidApiHost definido arriba (instagram120)
     const response = await fetch(`https://${rapidApiHost}/api/instagram/posts`, {
       method: 'POST',
       headers: {
